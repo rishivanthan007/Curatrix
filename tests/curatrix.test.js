@@ -6,9 +6,14 @@ import { promises as fs } from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { scanProject, createFixPlan, applyFix, saveBaseline, compareWithBaseline } from "../packages/core/dist/index.js";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const root = join(__dirname, '..'); // Points to project root regardless of OS
 const execFileAsync = promisify(execFile);
-const root = "C:/Users/rishi/Curatrix";
+
 
 async function copyFixture(name) {
   const source = path.join(root, "fixtures", name);
