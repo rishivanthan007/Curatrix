@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { Command, Help, Option, type CommanderError } from "commander/esm.mjs";
 import { applyFixes, compareWithBaseline, createFixPlan, saveBaseline, scanProject, type Issue, type ScanResult, type Severity } from "curatrix-core";
 import { OsvVulnerabilityProvider } from "curatrix-adapters";
+import { showBanner } from "./banner.js";
 import { outputResult, renderFixPreview, renderFixResult, renderText } from "./output.js";
 
 const CLI_PACKAGE = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")) as { version: string };
@@ -73,6 +74,8 @@ class StructuredHelp extends Help {
 }
 
 async function main(): Promise<void> {
+  console.log("");
+  showBanner(CLI_PACKAGE.version);
   const program = createProgram();
   await program.parseAsync(process.argv);
 }

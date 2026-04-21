@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { Command, Help, Option } from "commander/esm.mjs";
 import { applyFixes, compareWithBaseline, createFixPlan, saveBaseline, scanProject } from "curatrix-core";
 import { OsvVulnerabilityProvider } from "curatrix-adapters";
+import { showBanner } from "./banner.js";
 import { outputResult, renderFixPreview, renderFixResult } from "./output.js";
 const CLI_PACKAGE = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
 const osvProvider = new OsvVulnerabilityProvider();
@@ -56,6 +57,8 @@ class StructuredHelp extends Help {
     }
 }
 async function main() {
+    console.log("");
+    showBanner(CLI_PACKAGE.version);
     const program = createProgram();
     await program.parseAsync(process.argv);
 }

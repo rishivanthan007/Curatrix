@@ -17,8 +17,9 @@
     "pack:dry": "npm pack --dry-run"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^14.0.1",
     "curatrix-adapters": "*",
-    "curatrix-core": "*",
-    "commander": "^14.0.1"
+    "curatrix-core": "*"
   }
 }
